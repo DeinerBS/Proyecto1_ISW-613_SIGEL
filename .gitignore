@@ -1,0 +1,6 @@
+# Credenciales reales: nunca al repositorio
+config/config.php
+
+# Imágenes subidas por los usuarios: son datos, no código
+storage/equipos/*
+!storage/equipos/.gitkeep
