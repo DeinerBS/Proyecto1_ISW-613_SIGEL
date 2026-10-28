@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../utils/auth.php';
 require_once __DIR__ . '/../utils/messages.php';
+require_once __DIR__ . '/../utils/csrf.php';
 
 // Si ya hay sesión, no hay porque mostrar el login
 iniciarSesion();
@@ -22,6 +23,7 @@ require __DIR__ . '/pages/common/header.php';
           <?php mostrarAlerta(); ?>
 
           <form action="/actions/login.php" method="POST">
+            <?php csrfCampo(); ?>
             <div class="form-group">
               <label for="correo">Correo</label>
               <input type="email" class="form-control" id="correo" name="correo" maxlength="150" required autofocus>

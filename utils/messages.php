@@ -8,6 +8,7 @@ const MENSAJES = [
         'login_requerido'        => 'Debe iniciar sesión para acceder a esa página.',
         'sesion_expirada'        => 'Su sesión expiró por inactividad. Vuelva a iniciar sesión.',
         'error_servidor'         => 'Ocurrió un error. Intente de nuevo más tarde.',
+        'cuenta_bloqueada' => 'Demasiados intentos fallidos. Espere unos minutos y vuelva a intentarlo.',
     ],
     'exito' => [
         'sesion_cerrada' => 'Sesión cerrada correctamente.',

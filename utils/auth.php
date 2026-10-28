@@ -4,6 +4,10 @@ require_once __DIR__ . '/helpers.php';
 // Inactividad antes de cerrar la sesión en minutos (30 minutos)
 const SESION_TIMEOUT_SEGUNDOS = 30 * 60;
 
+// Control #9: Limitación de intentos fallidos de inicio de sesión 
+const MAX_INTENTOS_LOGIN = 3;
+const MINUTOS_BLOQUEO    = 2;
+
 // Inicia la sesión con la cookie configurada de forma segura
 function iniciarSesion()
 {
@@ -29,6 +33,9 @@ function loginUsuario(array $usuario)
 {
     iniciarSesion();
     session_regenerate_id(true);
+    
+    // El token de antes del login no se reutiliza en la sesión autenticada
+    unset($_SESSION['csrf_token']);
 
     $_SESSION['usuario_id']       = (int) $usuario['id'];
     $_SESSION['nombre']           = $usuario['nombre'];

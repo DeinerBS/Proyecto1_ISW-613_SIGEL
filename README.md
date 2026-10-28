@@ -81,8 +81,8 @@ http://sigel.local
 |---|---|---|
 | Administrador | admin@example.com | `Admin123+` |
 | Operador | operador@example.com | `Opera123+` |
-| Profesor | alli@example.com | `Profe123+` |
-| Profesor | kay@example.com | `Profe123+` |
+| Profesor | alli.rodriguez@example.com | `Profe123+` |
+| Profesor | kay.garcia@example.com | `Profe123+` |
 
 ---
 
