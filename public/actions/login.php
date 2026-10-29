@@ -86,4 +86,14 @@ try {
 }
 
 loginUsuario($usuario);
+
+if (isset($_POST['recordarme'])) {
+    try {
+        crearTokenRecordarme($conn, (int) $usuario['id']);
+    } catch (PDOException $ex) {
+        // Si falla, el login sigue, solo que sin "Recordarme"
+        error_log('Error al crear token Recordarme: ' . $ex->getMessage());
+    }
+}
+
 redirect('/pages/dashboard.php');

@@ -1,8 +1,9 @@
 <?php
+require_once __DIR__ . '/../../utils/database.php';
 require_once __DIR__ . '/../../utils/auth.php';
 require_once __DIR__ . '/../../utils/csrf.php';
 
-requiereLogin();
+requiereLogin($conn);
 
 $titulo = 'Inicio';
 require __DIR__ . '/common/header.php';

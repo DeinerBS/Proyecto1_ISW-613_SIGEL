@@ -1,11 +1,12 @@
 <?php
+require_once __DIR__ . '/../utils/database.php';
 require_once __DIR__ . '/../utils/auth.php';
 require_once __DIR__ . '/../utils/messages.php';
 require_once __DIR__ . '/../utils/csrf.php';
 
-// Si ya hay sesión, no hay porque mostrar el login
+// Si ya hay sesión o cookie "Recordarme", no hay porque mostrar el login
 iniciarSesion();
-if (isset($_SESSION['usuario_id'])) {
+if (isset($_SESSION['usuario_id'])|| loginConCookie($conn)) {
     redirect('/pages/dashboard.php');
 }
 
@@ -31,6 +32,10 @@ require __DIR__ . '/pages/common/header.php';
             <div class="form-group">
               <label for="password">Contraseña</label>
               <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="recordarme" name="recordarme" value="1">
+              <label class="form-check-label" for="recordarme">Recordarme</label>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
           </form>
