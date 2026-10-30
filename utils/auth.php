@@ -84,11 +84,37 @@ function requiereLogin(PDO $conn)
         redirect('/index.php?error=' . ($expirada ? 'sesion_expirada' : 'login_requerido'));
     }
 
+    // Control #8: rol y estado reales en cada petición
+    $stmt = $conn->prepare(
+        'SELECT u.nombre, r.nombre AS rol
+         FROM usuarios u
+         JOIN roles r ON r.id = u.rol_id
+         WHERE u.id = :id AND u.activo = 1 AND u.eliminado_en IS NULL'
+    );
+    $stmt->execute([':id' => $_SESSION['usuario_id']]);
+    $actual = $stmt->fetch();
+
+    // Desactivado o eliminado, se le cierra todo
+    if ($actual === false) {
+        revocarRecordarme($conn);
+        logoutUsuario();
+        redirect('/index.php?error=login_requerido');
+    }
+
+    $_SESSION['nombre']           = $actual['nombre'];
+    $_SESSION['rol']              = $actual['rol'];
     $_SESSION['ultima_actividad'] = time();
 }
 
-// ---------- Recordarme, esquema selector:validador ----------
+// Control #8: va después de requiereLogin() en cada página y acción restringida
+function requiereRol(array $rolesPermitidos)
+{
+    if (!in_array($_SESSION['rol'] ?? '', $rolesPermitidos, true)) {
+        redirect('/pages/dashboard.php?error=acceso_denegado');
+    }
+}
 
+// ---------- Recordarme, esquema selector:validador ----------
 function opcionesCookieRecordarme($expira)
 {
     return [

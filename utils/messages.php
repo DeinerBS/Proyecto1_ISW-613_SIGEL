@@ -9,6 +9,7 @@ const MENSAJES = [
         'sesion_expirada'        => 'Su sesión expiró por inactividad. Vuelva a iniciar sesión.',
         'error_servidor'         => 'Ocurrió un error. Intente de nuevo más tarde.',
         'cuenta_bloqueada' => 'Demasiados intentos fallidos. Espere unos minutos y vuelva a intentarlo.',
+        'acceso_denegado' => 'No cuentas con permisos para acceder a esa sección.',
     ],
     'exito' => [
         'sesion_cerrada' => 'Sesión cerrada correctamente.',
