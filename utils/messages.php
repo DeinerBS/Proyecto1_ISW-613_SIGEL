@@ -10,9 +10,16 @@ const MENSAJES = [
         'error_servidor'         => 'Ocurrió un error. Intente de nuevo más tarde.',
         'cuenta_bloqueada' => 'Demasiados intentos fallidos. Espere unos minutos y vuelva a intentarlo.',
         'acceso_denegado' => 'No cuentas con permisos para acceder a esa sección.',
+        'categoria_invalida'      => 'Ingrese un nombre y días entre 1 y 60.',
+        'categoria_duplicada'     => 'Ya existe una categoría con ese nombre.',
+        'categoria_no_encontrada' => 'La categoría no existe.',
+        'categoria_con_equipos' => 'No se puede eliminar porque la categoría tiene equipos asignados.',
     ],
     'exito' => [
         'sesion_cerrada' => 'Sesión cerrada correctamente.',
+        'categoria_creada'      => 'Categoría creada correctamente.',
+        'categoria_actualizada' => 'Categoría actualizada correctamente.',
+        'categoria_eliminada' => 'Categoría eliminada correctamente.',
     ],
 ];
 
