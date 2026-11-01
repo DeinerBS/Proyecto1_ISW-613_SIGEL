@@ -14,12 +14,22 @@ const MENSAJES = [
         'categoria_duplicada'     => 'Ya existe una categoría con ese nombre.',
         'categoria_no_encontrada' => 'La categoría no existe.',
         'categoria_con_equipos' => 'No se puede eliminar porque la categoría tiene equipos asignados.',
+        'usuario_invalido'      => 'Revise los datos de nombre, correo y rol.',
+        'password_invalida'     => 'La contraseña debe tener entre mínimo 8 caracteres.',
+        'correo_duplicado'      => 'Ya existe un usuario con el mismo correo.',
+        'usuario_no_encontrado' => 'El usuario no existe.',
+        'no_modificar_propio'   => 'No es posible quitarse el rol de administrador ni desactivar su propia cuenta.',
+        'no_eliminar_propio'    => 'No puede eliminar su propia cuenta.',
+        'usuario_con_prestamos' => 'No se puede eliminar ya que el usuario cuenta con préstamos activos.',
     ],
     'exito' => [
         'sesion_cerrada' => 'Sesión cerrada correctamente.',
         'categoria_creada'      => 'Categoría creada correctamente.',
         'categoria_actualizada' => 'Categoría actualizada correctamente.',
         'categoria_eliminada' => 'Categoría eliminada correctamente.',
+        'usuario_creado'      => 'Usuario creado correctamente.',
+        'usuario_actualizado' => 'Usuario actualizado correctamente.',
+        'usuario_eliminado' => 'Usuario eliminado correctamente.',
     ],
 ];
 
