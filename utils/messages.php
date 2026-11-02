@@ -21,7 +21,12 @@ const MENSAJES = [
         'no_modificar_propio'   => 'No es posible quitarse el rol de administrador ni desactivar su propia cuenta.',
         'no_eliminar_propio'    => 'No puede eliminar su propia cuenta.',
         'usuario_con_prestamos' => 'No se puede eliminar ya que el usuario cuenta con préstamos activos.',
-    ],
+        'equipo_invalido'      => 'Revise los datos, código: 2 a 30 letras con formato (ABC-123), nombre, categoría y estado.',
+        'equipo_duplicado'     => 'Ya existe un equipo con ese código.',
+        'equipo_no_encontrado' => 'El equipo no existe.',
+        'equipo_conflicto'     => 'Otro usuario modificó este equipo mientras usted lo editaba. Revise los datos actuales e intente de nuevo.',
+        'equipo_en_prestamo' => 'No se puede eliminar ya que el equipo está en un préstamo activo.',
+        ],
     'exito' => [
         'sesion_cerrada' => 'Sesión cerrada correctamente.',
         'categoria_creada'      => 'Categoría creada correctamente.',
@@ -30,6 +35,9 @@ const MENSAJES = [
         'usuario_creado'      => 'Usuario creado correctamente.',
         'usuario_actualizado' => 'Usuario actualizado correctamente.',
         'usuario_eliminado' => 'Usuario eliminado correctamente.',
+        'equipo_creado'      => 'Equipo creado correctamente.',
+        'equipo_actualizado' => 'Equipo actualizado correctamente.',
+        'equipo_eliminado' => 'Equipo eliminado correctamente.',
     ],
 ];
 
