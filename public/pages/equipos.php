@@ -4,6 +4,7 @@ require_once __DIR__ . '/../../utils/auth.php';
 require_once __DIR__ . '/../../utils/messages.php';
 require_once __DIR__ . '/../../utils/paginacion.php';
 require_once __DIR__ . '/../../utils/equipos.php';
+require_once __DIR__ . '/../../utils/recientes.php';
 
 requiereLogin($conn);
 requiereRol(['admin', 'operador']);
@@ -49,6 +50,8 @@ $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
 $stmt->execute();
 $equipos = $stmt->fetchAll();
 
+$recientes = obtenerEquiposRecientes($conn);
+
 $coloresEstado = [
     'operativo'     => 'success',
     'mantenimiento' => 'warning',
@@ -68,6 +71,17 @@ require __DIR__ . '/common/header.php';
     <?php endif; ?>
   </div>
 
+    <?php if ($recientes): ?>
+    <div class="mb-3">
+      <span class="text-muted small mr-2">Consultados recientemente:</span>
+      <?php foreach ($recientes as $r): ?>
+        <a href="/pages/equipo_ver.php?id=<?= (int) $r['id'] ?>" class="badge badge-light border p-2 mr-1">
+          <?= e($r['codigo']) ?> · <?= e($r['nombre']) ?>
+        </a>
+      <?php endforeach; ?>
+    </div>
+  <?php endif; ?>
+
   <form method="GET" class="form-inline mb-3">
     <input type="text" name="q" value="<?= e($q) ?>" class="form-control mr-2" placeholder="Buscar por código o nombre" maxlength="80">
     <select name="por_pagina" class="form-control mr-2">
@@ -85,9 +99,7 @@ require __DIR__ . '/common/header.php';
         <th>Nombre</th>
         <th>Categoría</th>
         <th>Estado</th>
-        <?php if ($puedeGestionar): ?>
-          <th class="text-right">Acciones</th>
-        <?php endif; ?>
+        <th class="text-right">Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -103,8 +115,9 @@ require __DIR__ . '/common/header.php';
           <td>
             <span class="badge badge-<?= $coloresEstado[$eq['estado']] ?>"><?= e(ESTADOS_EQUIPO[$eq['estado']]) ?></span>
           </td>
-          <?php if ($puedeGestionar): ?>
-            <td class="text-right">
+                    <td class="text-right">
+            <a href="/pages/equipo_ver.php?id=<?= (int) $eq['id'] ?>" class="btn btn-sm btn-outline-secondary">Ver</a>
+            <?php if ($puedeGestionar): ?>
               <a href="/pages/equipo_form.php?id=<?= (int) $eq['id'] ?>" class="btn btn-sm btn-outline-primary">Editar</a>
               <form action="/actions/equipo_eliminar.php" method="POST" class="d-inline"
                     onsubmit="return confirm('¿Eliminar este equipo?');">
@@ -112,8 +125,8 @@ require __DIR__ . '/common/header.php';
                 <input type="hidden" name="id" value="<?= (int) $eq['id'] ?>">
                 <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
               </form>
-            </td>
-          <?php endif; ?>
+            <?php endif; ?>
+          </td>
         </tr>
       <?php endforeach; ?>
     </tbody>

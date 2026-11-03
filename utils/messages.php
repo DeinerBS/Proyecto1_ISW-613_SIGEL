@@ -26,6 +26,10 @@ const MENSAJES = [
         'equipo_no_encontrado' => 'El equipo no existe.',
         'equipo_conflicto'     => 'Otro usuario modificó este equipo mientras usted lo editaba. Revise los datos actuales e intente de nuevo.',
         'equipo_en_prestamo' => 'No se puede eliminar ya que el equipo está en un préstamo activo.',
+        'imagen_invalida'      => 'Seleccione una imagen JPG, PNG o WEBP válida.',
+        'imagen_grande'        => 'La imagen no puede superar 2 MB.',
+        'imagen_limite'        => 'El equipo ya tiene el máximo de 5 imágenes.',
+        'imagen_no_encontrada' => 'La imagen no existe.',
         ],
     'exito' => [
         'sesion_cerrada' => 'Sesión cerrada correctamente.',
@@ -38,6 +42,8 @@ const MENSAJES = [
         'equipo_creado'      => 'Equipo creado correctamente.',
         'equipo_actualizado' => 'Equipo actualizado correctamente.',
         'equipo_eliminado' => 'Equipo eliminado correctamente.',
+        'imagen_subida'    => 'Imagen agregada correctamente.',
+        'imagen_eliminada' => 'Imagen eliminada correctamente.',
     ],
 ];
 
