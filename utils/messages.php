@@ -31,6 +31,12 @@ const MENSAJES = [
         'imagen_limite'        => 'El equipo ya tiene el máximo de 5 imágenes.',
         'imagen_no_encontrada' => 'La imagen no existe.',
         'horario_invalido' => 'Ingrese horas válidas (HH:MM) y la hora de inicio debe ser anterior a la de fin.',
+        'prestamo_invalido'     => 'Revise los datos: profesor, fechas válidas (el fin después del inicio) y entre 1 y 10 equipos.',
+        'prestamo_fecha_pasada' => 'La fecha de inicio no puede estar en el pasado.',
+        'fuera_de_horario'      => 'Fuera del horario de atención: lunes a viernes dentro del horario configurado.',
+        'equipo_no_disponible'  => 'Uno de los equipos seleccionados no existe o no está operativo.',
+        'prestamo_excede_dias'  => 'El préstamo supera los días máximos de la categoría de uno de los equipos.',
+        'prestamo_traslape'     => 'Uno de los equipos ya está prestado en ese horario.',
         ],
     'exito' => [
         'sesion_cerrada' => 'Sesión cerrada correctamente.',
@@ -46,6 +52,7 @@ const MENSAJES = [
         'imagen_subida'    => 'Imagen agregada correctamente.',
         'imagen_eliminada' => 'Imagen eliminada correctamente.',
         'horario_actualizado' => 'Horario de atención actualizado.',
+        'prestamo_creado' => 'Préstamo registrado correctamente.',
     ],
 ];
 

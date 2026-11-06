@@ -18,7 +18,7 @@ require __DIR__ . '/common/header.php';
       <div class="card shadow-sm">
         <div class="card-body">
           <h1 class="h4 mb-1">Horario de atención</h1>
-          <p class="text-muted small">Inicio y entrega de préstamos: lunes a viernes, dentro de este horario, límites incluidos.</p>
+          <p class="text-muted small">Inicio y entrega de préstamos: lunes a viernes, dentro de este horario, ambos límites incluidos.</p>
           <?php mostrarAlerta(); ?>
 
           <form action="/actions/configuracion_guardar.php" method="POST">
