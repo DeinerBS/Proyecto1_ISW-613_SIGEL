@@ -122,3 +122,13 @@ CREATE TABLE bitacora (
     creado_en       DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_bitacora_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 ) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------
+
+-- Configuración: Regla 5: horario de atención
+
+CREATE TABLE configuracion (
+    clave          VARCHAR(50)  PRIMARY KEY,
+    valor          VARCHAR(100) NOT NULL,
+    actualizado_en DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB;

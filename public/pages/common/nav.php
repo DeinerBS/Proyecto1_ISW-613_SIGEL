@@ -8,6 +8,7 @@
       <li class="nav-item"><a class="nav-link" href="/pages/categorias.php">Categorías</a></li>
       <li class="nav-item"><a class="nav-link" href="/pages/equipos.php">Equipos</a></li>
       <li class="nav-item"><a class="nav-link" href="/pages/reportes.php">Reportes</a></li>
+      <li class="nav-item"><a class="nav-link" href="/pages/configuracion.php">Configuración</a></li>
     <?php elseif ($rol === 'operador'): ?>
       <li class="nav-item"><a class="nav-link" href="/pages/prestamos.php">Préstamos</a></li>
       <li class="nav-item"><a class="nav-link" href="/pages/equipos.php">Equipos</a></li>

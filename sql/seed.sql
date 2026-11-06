@@ -42,8 +42,8 @@ INSERT INTO equipos (id, categoria_id, codigo, nombre, estado) VALUES
     (5, 3, 'Regl-01',  'Regleta Argom Blanca',       'operativo');
 -- -------------------------------------------------------
 
--- Préstamos: uno ya devuelto (pasado) y uno aprobado (futuro)
--- Las fechas se calculan desde NOW() para que el seed siga funcionando en cualquier día
+-- Préstamos: uno ya devuelto y uno aprobado
+-- Calcular con NOW() para que el seed siga funcionando en cualquier día
 INSERT INTO prestamos (id, usuario_id, operador_id, estado, fecha_inicio, fecha_fin) VALUES
     (1, 3, 2, 'devuelto', DATE_SUB(NOW(), INTERVAL 10 DAY), DATE_SUB(NOW(), INTERVAL 8 DAY)),
     (2, 4, 2, 'aprobado', DATE_ADD(NOW(), INTERVAL 1 DAY),  DATE_ADD(NOW(), INTERVAL 3 DAY));
@@ -55,3 +55,8 @@ INSERT INTO prestamo_detalle (prestamo_id, equipo_id, fecha_devolucion) VALUES
     (1, 3, DATE_SUB(NOW(), INTERVAL 8 DAY)),
     (2, 2, NULL),
     (2, 5, NULL);
+
+-- Horario de atención: Regla 5: ambos límites inclusivos
+INSERT INTO configuracion (clave, valor) VALUES
+    ('hora_inicio', '08:00'),
+    ('hora_fin',    '17:00');

@@ -30,6 +30,7 @@ const MENSAJES = [
         'imagen_grande'        => 'La imagen no puede superar 2 MB.',
         'imagen_limite'        => 'El equipo ya tiene el máximo de 5 imágenes.',
         'imagen_no_encontrada' => 'La imagen no existe.',
+        'horario_invalido' => 'Ingrese horas válidas (HH:MM) y la hora de inicio debe ser anterior a la de fin.',
         ],
     'exito' => [
         'sesion_cerrada' => 'Sesión cerrada correctamente.',
@@ -44,6 +45,7 @@ const MENSAJES = [
         'equipo_eliminado' => 'Equipo eliminado correctamente.',
         'imagen_subida'    => 'Imagen agregada correctamente.',
         'imagen_eliminada' => 'Imagen eliminada correctamente.',
+        'horario_actualizado' => 'Horario de atención actualizado.',
     ],
 ];
 
