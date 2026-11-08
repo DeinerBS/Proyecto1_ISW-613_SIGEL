@@ -37,6 +37,9 @@ const MENSAJES = [
         'equipo_no_disponible'  => 'Uno de los equipos seleccionados no existe o no está operativo.',
         'prestamo_excede_dias'  => 'El préstamo supera los días máximos de la categoría de uno de los equipos.',
         'prestamo_traslape'     => 'Uno de los equipos ya está prestado en ese horario.',
+        'prestamo_no_encontrado' => 'El préstamo no existe.',
+        'transicion_invalida'    => 'Esa acción no es válida para el estado actual del préstamo.',
+        'prestamo_conflicto'     => 'Otro usuario cambió el estado de este préstamo. Revise el estado actual.',
         ],
     'exito' => [
         'sesion_cerrada' => 'Sesión cerrada correctamente.',
@@ -53,6 +56,7 @@ const MENSAJES = [
         'imagen_eliminada' => 'Imagen eliminada correctamente.',
         'horario_actualizado' => 'Horario de atención actualizado.',
         'prestamo_creado' => 'Préstamo registrado correctamente.',
+        'prestamo_actualizado' => 'Estado del préstamo actualizado.',
     ],
 ];
 

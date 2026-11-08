@@ -153,4 +153,4 @@ try {
     throw $ex;
 }
 
-redirect('/pages/dashboard.php?exito=prestamo_creado');
+redirect('/pages/prestamos.php?exito=prestamo_creado');
