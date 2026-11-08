@@ -186,6 +186,12 @@ El enunciado deja algunos puntos abiertos. Estas son las decisiones tomadas y su
 - **Traslape:** se aplica la condición de la sección 5.3 con desigualdad estricta, por lo que un préstamo puede empezar exactamente cuando termina otro.
 - **Concurrencia:** las filas de los equipos se bloquean con `SELECT ... FOR UPDATE` dentro de la transacción, en orden ascendente de id para evitar interbloqueos.
 
+- **Transiciones de estado:** solicitado → aprobado → entregado → devuelto; se puede cancelar desde solicitado o aprobado. Devuelto y cancelado son estados finales. Un préstamo entregado no se cancela.
+- Todas las transiciones las realiza el operador; el profesor solo consulta sus préstamos.
+- Al entregar, todos los equipos deben seguir operativos.
+- **Devolución completa:** se registran juntos todos los equipos del préstamo (con su fecha de devolución).
+- El cambio de estado solo se aplica si el estado no cambió desde que se leyó (`UPDATE ... WHERE estado = :actual`).
+
 ### 5.8 Regla 5: horario de atención
 - **Interpretación de "inicio y entrega":** deben estar de lunes a viernes dentro del horario:
   - la fecha de inicio y la fecha de fin (devolución) del préstamo;

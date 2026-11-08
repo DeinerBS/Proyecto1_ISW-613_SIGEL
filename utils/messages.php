@@ -40,6 +40,7 @@ const MENSAJES = [
         'prestamo_no_encontrado' => 'El préstamo no existe.',
         'transicion_invalida'    => 'Esa acción no es válida para el estado actual del préstamo.',
         'prestamo_conflicto'     => 'Otro usuario cambió el estado de este préstamo. Revise el estado actual.',
+        'rango_invalido' => 'Seleccione un rango de fechas válido.',
         ],
     'exito' => [
         'sesion_cerrada' => 'Sesión cerrada correctamente.',

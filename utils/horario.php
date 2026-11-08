@@ -18,7 +18,7 @@ function dentroDeHorario(PDO $conn, DateTime $momento)
     $dia  = (int) $momento->format('N'); // 1 = lunes ... 7 = domingo
     $hora = $momento->format('H:i');
 
-    return $dia <= 5 && $hora >= $horario['inicio'] && $hora <= $horario['fin'];
+    return $dia <= 7 && $hora >= $horario['inicio'] && $hora <= $horario['fin'];
 }
 
 // Formato HH:MM de 24 horas
