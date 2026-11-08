@@ -1,6 +1,14 @@
 <?php
 require_once __DIR__ . '/../config/config.php';
 
+// Control #11: no mostrar errores; registrarlos en storage/logs/app.log
+error_reporting(E_ALL);
+ini_set('display_errors', '0');
+ini_set('log_errors', '1');
+ini_set('error_log', __DIR__ . '/../storage/logs/app.log');
+
+header_remove('X-Powered-By'); // no revelar la versión de PHP
+
 // Control #11: errores no capturados van al log, nunca al usuario
 set_exception_handler(function ($ex) {
     error_log('Error no controlado: ' . $ex->getMessage() . ' en ' . $ex->getFile() . ':' . $ex->getLine());

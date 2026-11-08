@@ -4,3 +4,7 @@ config/config.php
 # Imágenes subidas por los usuarios: son datos, no código
 storage/equipos/*
 !storage/equipos/.gitkeep
+
+# Logs, datos internos, no van al repositorio
+storage/logs/*
+!storage/logs/.gitkeep

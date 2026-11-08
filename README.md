@@ -94,6 +94,7 @@ Proyecto1_ISW-613_SIGEL/
 ├── utils/           Funciones reutilizables: conexión a BD, autenticación, validaciones
 ├── storage/
 │   └── equipos/     Imágenes subidas (sin acceso directo desde la web)
+│   └── logs/        Registro de errores (app.log, fuera de Git)
 ├── sql/             schema.sql y seed.sql
 ├── public/          Único directorio expuesto por Apache (DocumentRoot)
 │   ├── index.php
@@ -121,6 +122,7 @@ El enunciado deja algunos puntos abiertos. Estas son las decisiones tomadas y su
 - Credenciales en `config/config.php` (excluido de Git); `config/config.example.php` sirve de plantilla.
 - Zona horaria de la aplicación: `America/Costa_Rica`.
 - Errores no controlados: un manejador global los registra en el log y muestra un mensaje genérico.
+- Errores: no se muestran al usuario; un manejador global y la configuración de PHP los registran en `storage/logs/app.log` (fuera de `public/` y de Git).
 
 ### 5.3 Modelo de datos
 - **Imágenes:** tabla `equipo_imagenes` (relación 1 a N) en lugar de la columna `imagen_ruta`, porque un equipo puede tener varias imágenes. Solo se guarda el nombre del archivo; la carpeta es fija.
@@ -201,3 +203,44 @@ El enunciado deja algunos puntos abiertos. Estas son las decisiones tomadas y su
 - **Límites inclusivos:** con horario 08:00–17:00 se acepta exactamente a las 08:00 y a las 17:00 (todo ese minuto); a las 17:01 ya no.
 - Sábado y domingo siempre se rechazan.
 - El horario se lee de la tabla `configuracion` en cada validación; el admin lo cambia desde **Configuración** (queda en la bitácora) y surte efecto sin tocar código. Valores iniciales: 08:00 a 17:00.
+
+### 5.9 Reporte
+- Se cuentan los préstamos **entregados o devueltos** cuya **fecha de inicio** está en el rango; ambos días se incluyen completos.
+- Rango por defecto: del primer día del mes actual a hoy.
+- Incluye equipos eliminados después, porque el reporte es histórico.
+- El CSV incluye BOM UTF-8 para que Excel muestre las tildes correctamente.
+
+## 6. Controles de seguridad
+
+| # | Control | Implementación | Dónde |
+|---|---|---|---|
+| 1 | SQL Injection | Toda consulta con datos externos usa sentencias preparadas. `ERRMODE_EXCEPTION` y `EMULATE_PREPARES` desactivado. Las partes dinámicas del SQL (marcadores de `IN`, condiciones del `WHERE`) se arman solo con texto propio; los valores siempre van como parámetros | `utils/database.php` y todas las consultas |
+| 2 | Contraseñas | `password_hash()` al crear o cambiar; `password_verify()` al iniciar sesión | `actions/login.php`, `actions/usuario_guardar.php` |
+| 3 | Sesiones | Cookie con `HttpOnly`, `SameSite=Lax` y `Secure` en HTTPS; `use_strict_mode`; `session_regenerate_id(true)` al autenticar; expiración tras 30 min de inactividad; el cierre destruye la sesión y su cookie y revoca el token "Recordarme" | `utils/auth.php` |
+| 4 | CSRF | Token por sesión (`random_bytes(32)`) en todo formulario que modifica estado, validado con `hash_equals()`; se renueva al iniciar sesión | `utils/csrf.php` |
+| 5 | XSS | Toda salida pasa por `e()`: `htmlspecialchars` con `ENT_QUOTES \| ENT_SUBSTITUTE` y UTF-8. Los números se convierten con `(int)` | `utils/helpers.php` |
+| 6 | Validación | En el servidor: tipo (`is_string`, `filter_var`), longitud, rango, formato (expresiones regulares) y listas blancas. También para cookies y parámetros de URL | Todas las acciones y páginas |
+| 7 | Archivos | Límite de 2 MB, lista blanca de extensiones, MIME real con `finfo`, nombre aleatorio generado por el servidor. Se guardan fuera de `public/` y se sirven con verificación de sesión y `nosniff` | `actions/equipo_imagen_subir.php`, `imagen.php` |
+| 8 | Autorización | `requiereLogin()` y `requiereRol()` en cada página y acción, incluido el acceso directo por URL. El rol se relee de la BD en cada petición. El profesor solo accede a sus préstamos (filtro por dueño) | `utils/auth.php`, `pages/prestamos.php`, `pages/prestamo_ver.php` |
+| 9 | Autenticación | Mensaje genérico ante cualquier fallo; bloqueo de 2 minutos tras 3 intentos fallidos | `actions/login.php` |
+| 10 | Post/Redirect/Get | Toda operación de escritura termina con una redirección | Todas las acciones |
+| 11 | Errores | Manejador global de excepciones; `display_errors` desactivado; registro en `storage/logs/app.log`; sin cabecera `X-Powered-By` | `utils/database.php` |
+| 12 | Exportación CSV | `fputcsv()` y neutralización de celdas que empiezan con `=`, `+`, `-`, `@`, tabulador o retorno de carro | `utils/reportes.php`, `reporte_csv.php` |
+| 13 | Cookies | Ver tabla siguiente | `utils/auth.php`, `utils/paginacion.php`, `utils/recientes.php` |
+
+### Cookies
+
+| Cookie | Uso | Validación |
+|---|---|---|
+| `PHPSESSID` | Sesión autenticada (`$_SESSION`) | Gestionada por PHP con modo estricto |
+| `sigel_remember` | "Recordarme" con esquema selector:validador; 14 días | Formato exacto; búsqueda por selector; `hash_equals` sobre el SHA-256 del validador; expiración; rotación en cada uso |
+| `sigel_pp_<crud>` | Registros por página de cada listado | Lista blanca (5, 10, 25, 50); cualquier otro valor usa 10 |
+| `sigel_recientes` | Últimos 5 equipos consultados | Solo enteros válidos, sin repetir, máximo 5; los datos se buscan en la BD |
+
+Todas las cookies se crean con `HttpOnly`, `SameSite=Lax` y `Secure` cuando la conexión es HTTPS.
+
+### Integridad y concurrencia
+- Cada operación de escritura se ejecuta en una transacción junto con su registro en la bitácora.
+- Creación de préstamos: bloqueo de los equipos con `SELECT ... FOR UPDATE`.
+- Edición de equipos: bloqueo optimista con la columna `version`.
+- Cambios de estado de préstamos: `UPDATE` condicionado al estado leído.
