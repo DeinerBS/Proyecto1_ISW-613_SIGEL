@@ -39,7 +39,7 @@ require __DIR__ . '/common/header.php';
 
   <p class="text-muted small">Se cuentan los préstamos entregados o devueltos cuya fecha de inicio esté en el rango.</p>
 
-  <table class="table table-striped bg-white">
+  <table class="table table-striped">
     <thead>
       <tr><th>#</th><th>Código</th><th>Equipo</th><th>Categoría</th><th class="text-right">Veces prestado</th></tr>
     </thead>

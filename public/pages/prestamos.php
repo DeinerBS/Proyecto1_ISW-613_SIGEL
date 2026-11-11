@@ -93,7 +93,7 @@ require __DIR__ . '/common/header.php';
     <button type="submit" class="btn btn-secondary">Aplicar</button>
   </form>
 
-  <table class="table table-striped bg-white">
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>#</th>

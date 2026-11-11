@@ -1,0 +1,34 @@
+/* Tema Solar: texto más claro para mejorar el contraste */
+body,
+.table,
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    color: #eee8d5;
+}
+
+/* Textos secundarios un poco más visibles */
+.text-muted {
+    color: #93a1a1 !important;
+}
+
+/* Equipos recientes: letra del color del fondo */
+a.badge-reciente,
+a.badge-reciente:hover,
+a.badge-reciente:focus {
+    color: #002b36;
+}
+
+/* Botones de eliminar en rojo ya que en Solar "danger" es magenta */
+.btn-outline-danger {
+    color: #dc322f;
+    border-color: #dc322f;
+}
+
+.btn-outline-danger:hover,
+.btn-outline-danger:focus,
+.btn-outline-danger:not(:disabled):not(.disabled):active {
+    color: #fff;
+    background-color: #dc322f;
+    border-color: #dc322f;
+    box-shadow: 0 0 0 0.2rem rgba(220, 50, 47, 0.4);
+}

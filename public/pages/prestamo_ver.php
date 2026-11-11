@@ -78,7 +78,7 @@ require __DIR__ . '/common/header.php';
   </div>
 
   <h2 class="h5">Equipos</h2>
-  <table class="table bg-white">
+  <table class="table">
     <thead>
       <tr><th>Código</th><th>Nombre</th><th>Devuelto</th></tr>
     </thead>

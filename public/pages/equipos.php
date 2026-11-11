@@ -75,7 +75,7 @@ require __DIR__ . '/common/header.php';
     <div class="mb-3">
       <span class="text-muted small mr-2">Consultados recientemente:</span>
       <?php foreach ($recientes as $r): ?>
-        <a href="/pages/equipo_ver.php?id=<?= (int) $r['id'] ?>" class="badge badge-light border p-2 mr-1">
+        <a href="/pages/equipo_ver.php?id=<?= (int) $r['id'] ?>" class="badge badge-secondary badge-reciente p-2 mr-1">
           <?= e($r['codigo']) ?> · <?= e($r['nombre']) ?>
         </a>
       <?php endforeach; ?>
@@ -92,7 +92,7 @@ require __DIR__ . '/common/header.php';
     <button type="submit" class="btn btn-secondary">Aplicar</button>
   </form>
 
-  <table class="table table-striped bg-white">
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>Código</th>
