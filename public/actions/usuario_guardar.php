@@ -4,9 +4,7 @@ require_once __DIR__ . '/../../utils/auth.php';
 require_once __DIR__ . '/../../utils/csrf.php';
 require_once __DIR__ . '/../../utils/bitacora.php';
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    redirect('/pages/usuarios.php');
-}
+requirePost('/pages/usuarios.php');
 
 requiereLogin($conn);
 requiereRol(['admin']);

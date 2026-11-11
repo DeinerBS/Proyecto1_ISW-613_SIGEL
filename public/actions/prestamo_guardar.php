@@ -6,9 +6,7 @@ require_once __DIR__ . '/../../utils/bitacora.php';
 require_once __DIR__ . '/../../utils/horario.php';
 require_once __DIR__ . '/../../utils/prestamos.php';
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    redirect('/pages/prestamo_form.php');
-}
+requirePost('/pages/prestamos.php');
 
 requiereLogin($conn);
 requiereRol(['operador']);

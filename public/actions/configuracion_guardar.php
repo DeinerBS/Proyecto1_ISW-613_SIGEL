@@ -5,9 +5,7 @@ require_once __DIR__ . '/../../utils/csrf.php';
 require_once __DIR__ . '/../../utils/bitacora.php';
 require_once __DIR__ . '/../../utils/horario.php';
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    redirect('/pages/configuracion.php');
-}
+requirePost('/pages/configuracion.php');
 
 requiereLogin($conn);
 requiereRol(['admin']);

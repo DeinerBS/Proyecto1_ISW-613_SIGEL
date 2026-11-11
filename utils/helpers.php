@@ -13,3 +13,10 @@ function redirect($url)
     header('Location: ' . $url);
     exit;
 }
+
+function requirePost($url)
+{
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        redirect($url);
+    }
+}
